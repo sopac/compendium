@@ -1,0 +1,24 @@
+<component name="libraryTable">
+  <library name="grails">
+    <CLASSES>
+      <root url="file://$USER_HOME$/Lib/grails" />
+      <root url="file://$USER_HOME$/Lib/grails/dist" />
+      <root url="file://$USER_HOME$/Lib/grails/lib" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="file:///opt/grails-1.3.3/doc/api" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="file:///opt/grails-1.3.3/src/commons" />
+      <root url="file:///opt/grails-1.3.3/src/groovy" />
+      <root url="file:///opt/grails-1.3.3/src/persistence" />
+      <root url="file:///opt/grails-1.3.3/src/scaffolding" />
+      <root url="file:///opt/grails-1.3.3/src/tiger" />
+      <root url="file:///opt/grails-1.3.3/src/web" />
+      <root url="file:///opt/grails-1.3.3/src/java" />
+    </SOURCES>
+    <jarDirectory url="file://$USER_HOME$/Lib/grails" recursive="false" />
+    <jarDirectory url="file://$USER_HOME$/Lib/grails/dist" recursive="false" />
+    <jarDirectory url="file://$USER_HOME$/Lib/grails/lib" recursive="false" />
+  </library>
+</component>
