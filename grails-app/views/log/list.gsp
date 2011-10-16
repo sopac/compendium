@@ -46,10 +46,13 @@
 
                     <td>${fieldValue(bean: logInstance, field: "type")}</td>
 
+
                     <g:if test="${!logInstance.project.equals('*')}">
-                        <g:set var="pdesc" value="${Project.get(logInstance.project.toLong()).title}"></g:set>
-                        <td><a href="${createLink(controller: 'project', action: 'show', id: logInstance.project.toLong())}">${pdesc}</a>  (<b>${Project.get(logInstance.project.toLong()).session}</b>)
-                        </td>
+                        <g:if test="${Project.get(logInstance.project.toLong()) != null}">
+                            <g:set var="pdesc" value="${Project.get(logInstance.project.toLong()).title}"></g:set>
+                            <td><a href="${createLink(controller: 'project', action: 'show', id: logInstance.project.toLong())}">${pdesc}</a>  (<b>${Project.get(logInstance.project.toLong()).session}</b>)
+                            </td>
+                        </g:if>
                     </g:if>
                     <g:else>
                         <td>*</td>

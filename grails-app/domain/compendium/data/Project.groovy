@@ -26,6 +26,10 @@ class Project {
 
     static hasMany = [links: Link, countries: Country]
 
+    static Mapping = {
+        id generator: 'increment'
+    }
+
     static constraints = {
         title()
         projectYear()

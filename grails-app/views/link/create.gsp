@@ -23,7 +23,7 @@
                 <g:renderErrors bean="${linkInstance}" as="list" />
             </div>
             </g:hasErrors>
-            <g:form action="save" method="post" >
+            <g:form action="save" >
                 <div class="dialog">
                     <table>
                         <tbody>
@@ -39,10 +39,24 @@
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
+                                    <label for="type"><g:message code="link.type.label" default="Type" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: linkInstance, field: 'type', 'errors')}">
+                                    <g:select name="type" from="${linkInstance.constraints.type.inList}" value="${linkInstance?.type}" valueMessagePrefix="link.type"  />
+                                </td>
+                            </tr>
+                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
                                     <label for="url"><g:message code="link.url.label" default="Url" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: linkInstance, field: 'url', 'errors')}">
                                     <g:textField name="url" value="${linkInstance?.url}" />
+                                    <i><br/>
+                                    For Virtual Library Reports enter ReportID eg: MA186  <br/>
+                                    For Imagery, enter Geonerwork UUID eg: 81cc3832-fc1c-42e4-b235-23068d7e3b36 <br/>
+                                    For Documents, enter filename eg: Contract-Vanuatu.pdf from <a target="_blank" href="http://ict.sopac.org/compendium-documents/">http://ict.sopac.org/compendium-documents/</a>
+                                </i>
                                 </td>
                             </tr>
                         

@@ -27,14 +27,21 @@
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="link.title.label" default="Title" /></td>
                             
-                            <td valign="top" class="value">${fieldValue(bean: linkInstance, field: "title")}</td>
+                            <td valign="top" class="value"><b>${fieldValue(bean: linkInstance, field: "title")}</b></td>
                             
                         </tr>
                     
                         <tr class="prop">
-                            <td valign="top" class="name"><g:message code="link.url.label" default="Download" /></td>
+                            <td valign="top" class="name"><g:message code="link.type.label" default="Type" /></td>
                             
-                            <td valign="top" class="value"><a target="_blank" href="${fieldValue(bean: linkInstance, field: 'url')}">${fieldValue(bean: linkInstance, field: "url")}</a></td>
+                            <td valign="top" class="value">${fieldValue(bean: linkInstance, field: "type")}</td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="link.url.label" default="Url" /></td>
+                            
+                            <td valign="top" class="value">${fieldValue(bean: linkInstance, field: "url")}</td>
                             
                         </tr>
                     

@@ -196,7 +196,7 @@
                         <label for="links"><g:message code="project.links.label" default="Links"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: projectInstance, field: 'links', 'errors')}">
-                        <g:select name="links" from="${compendium.data.Link.list()}" multiple="yes" optionKey="id" size="20" value="${projectInstance?.links*.id}"/>
+                        <g:select name="links" from="${compendium.data.Link.listOrderByType()}" multiple="yes" optionKey="id" size="100" value="${projectInstance?.links*.id}"/>
                     </td>
                 </tr>
 

@@ -14,6 +14,7 @@ environments {
     development {
         dataSource {
             dbCreate = "update" // one of 'create', 'create-drop','update'
+            //url = "jdbc:postgresql://192.168.20.32/compendium_db"
             url = "jdbc:postgresql:compendium_db"
         }
     }

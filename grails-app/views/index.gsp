@@ -316,24 +316,23 @@
 
             <g:if test="${session.user != null}">
 
+                <b>${session.user}</b> logged in
+                <br/>
+                <br/>
+                <hr width="50%"/>
+
+                <i>Search Sessions</i>
+                <richui:autoComplete name="name" action="${createLinkTo('dir': 'autoComplete/searchAJAX')}" onItemSelect="document.location.href = '${createLinkTo(dir: 'project/listSessions')}?session=' + id;"/>
+
+                <hr width="50%"/>
+
+                <input style="width: 142px" type=button onClick="location.href = '${createLink(controller:'project', action:'create')}'" value='Create New Collection'>
+                <br/>
+                <input style="width: 142px" type=button onClick="location.href = '${createLink(controller:'link', action:'list')}'" value='Define Linkages'>
+                <br/>
+                <input style="width: 142px" type=button onClick="location.href = '${createLink(controller:'log', action:'list')}'" value='View Logs'>
+                <br/>
                 <g:form action="logout" controller="login" method="post">
-
-                    <b>${session.user}</b> logged in
-                    <br/>
-                    <br/>
-                    <hr width="50%"/>
-
-                    <i>Search Sessions</i>
-                    <richui:autoComplete name="name" action="${createLinkTo('dir': 'autoComplete/searchAJAX')}" onItemSelect="document.location.href = '${createLinkTo(dir: 'project/listSessions')}?session=' + id;"/>
-
-                    <hr width="50%"/>
-
-                    <input style="width: 142px" type=button onClick="location.href = '${createLink(controller:'project', action:'create')}'" value='Create New Collection'>
-                    <br/>
-                    <input style="width: 142px" type=button onClick="location.href = '${createLink(controller:'link', action:'list')}'" value='Define Linkages'>
-                    <br/>
-                    <input style="width: 142px" type=button onClick="location.href = '${createLink(controller:'log', action:'list')}'" value='View Logs'>
-                    <br/>
                     <g:actionSubmit style="width: 142px" value="Logout"/>
                     <br/>
 

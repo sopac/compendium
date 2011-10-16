@@ -9,11 +9,9 @@ class ProjectController {
     }
 
     def listSessions = {
-
         def projectid = params.session
         String session = Project.get(projectid).session
         def projects = Project.findAllBySession(session)
-
         [projectInstanceList: projects, projectInstanceTotal: projects.size()]
     }
 
@@ -55,9 +53,12 @@ class ProjectController {
             redirect(action: "list")
         }
         else {
+            String thumbnail = "http://geonetwork.sopac.org/geonetwork/images/spc.png"
             [projectInstance: projectInstance]
         }
     }
+
+
 
     def edit = {
         def projectInstance = Project.get(params.id)
