@@ -186,7 +186,8 @@
 
                 <td valign="top" style="text-align: left;" class="value">
                     <ul>
-                        <g:each in="${projectInstance.countries}" var="c">
+                    %{--<g:each in="${projectInstance.countries}" var="c">--}%
+                        <g:each in="${countries}" var="c">
                             <li><g:link controller="country" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></li>
                         </g:each>
                     </ul>

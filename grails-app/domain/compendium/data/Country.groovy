@@ -14,6 +14,9 @@ class Country {
         code()
         membership()
     }
+    static mapping = {
+        sort "name"
+    }
 
 
     String toString() {

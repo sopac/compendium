@@ -28,13 +28,14 @@ class Project {
 
     static Mapping = {
         id generator: 'increment'
+
     }
 
     static constraints = {
         title()
         projectYear()
-        type(inList: ["", "Programme", "Cruise", "Workshop", "Activity", "Study", "Event", "Report", "Proposal", "Training", "Monitoring Station", "Meeting", "Project", "Map", "Seminar", "Imagery",
-                "Conference",
+        type(inList: ["", "Programme", "Cruise", "Workshop", "Activity/Task", "Study", "Event", "Report", "Proposal", "Training", "Meeting", "Project", "Map/Chart", "Mapping", "Seminar", "Imagery",
+                "Conference/Forum",
                 "Assessment",
                 "Equipment",
                 "Survey",

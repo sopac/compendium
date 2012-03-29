@@ -24,7 +24,7 @@
             <thead>
             <tr>
 
-               <g:sortableColumn property="title" title="${message(code: 'link.title.label', default: 'Title')}"/>
+                <g:sortableColumn property="title" title="${message(code: 'link.title.label', default: 'Title')}"/>
 
                 <g:sortableColumn property="type" title="${message(code: 'link.type.label', default: 'Type')}"/>
 

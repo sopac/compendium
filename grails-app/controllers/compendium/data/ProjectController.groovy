@@ -53,8 +53,9 @@ class ProjectController {
             redirect(action: "list")
         }
         else {
+            def countries = projectInstance.getCountries().sort()
             String thumbnail = "http://geonetwork.sopac.org/geonetwork/images/spc.png"
-            [projectInstance: projectInstance]
+            [projectInstance: projectInstance, countries: countries]
         }
     }
 
@@ -67,7 +68,26 @@ class ProjectController {
             redirect(action: "list")
         }
         else {
-            return [projectInstance: projectInstance]
+            //println params.alpha
+            def links = compendium.data.Link.listOrderByTitle();
+            if (params.alpha != null) {
+                def tmp = []
+                links.each { l ->
+                    if (l.title != null) {
+                        if (l.title.length() > 1) {
+                            if (l.title.toUpperCase().substring(0, 1).equals(params.alpha)) tmp << l
+                        }
+                    }
+                }
+                links = tmp
+            }
+
+            if (params.type != null) {
+                links = Link.findAllByType(params.type, [sort: 'title'])
+            }
+
+
+            return [projectInstance: projectInstance, links: links]
         }
     }
 
@@ -83,7 +103,19 @@ class ProjectController {
                     return
                 }
             }
+
+            def links1 = projectInstance.links
+
+            def l = []
+            params.links.each {
+                links
+            }
+
+
+            params.links = links1
+
             projectInstance.properties = params
+
             if (!projectInstance.hasErrors() && projectInstance.save(flush: true)) {
                 flash.message = "${message(code: 'default.updated.message', args: [message(code: 'project.label', default: 'Project'), projectInstance.title])}"
 

@@ -9,7 +9,7 @@ class LinkController {
     }
 
     def list = {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
+        params.max = Math.min(params.max ? params.int('max') : 30, 100)
         [linkInstanceList: Link.list(params), linkInstanceTotal: Link.count()]
     }
 
@@ -58,7 +58,7 @@ class LinkController {
             if (params.version) {
                 def version = params.version.toLong()
                 if (linkInstance.version > version) {
-                    
+
                     linkInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'link.label', default: 'Link')] as Object[], "Another user has updated this Link while you were editing")
                     render(view: "edit", model: [linkInstance: linkInstance])
                     return

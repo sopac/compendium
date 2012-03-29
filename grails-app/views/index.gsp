@@ -6,13 +6,14 @@
     <meta name="layout" content="main"/>
 
     <resource:autoComplete skin="default"/>
+    <resource:tabView/>
 
     <script type="text/javascript"
             src="${resource(dir: 'js', file: 'dojo/dojo/dojo.js')}"></script>
     <script type="text/javascript">
         dojo.require("dojox.widget.FisheyeList");
         dojo.require("dojo.parser");
-        dojo.addOnLoad(function() {
+        dojo.addOnLoad(function () {
             dojo.parser.parse();
         });
     </script>
@@ -308,38 +309,83 @@
     <div style="background-color:#e0ffff; padding: 15px; border: blue; border-width: thick;">
 
         <div align="center" style="width: 100%; ">
+
             <g:if test="${session.user == null}">
-                |
-                <input type=button onClick="location.href = '${createLink(controller:'login', action:'index')}'" value='Login'>
-                |
+                <a href="${createLink(controller: 'login', action: 'index')}">
+                    <g:img dir="images" file="login.png"/> <br/>
+                    Login
+                </a>
             </g:if>
 
             <g:if test="${session.user != null}">
 
                 <b>${session.user}</b> logged in
                 <br/>
+
+
+
+
+
                 <br/>
-                <hr width="50%"/>
 
-                <i>Search Sessions</i>
-                <richui:autoComplete name="name" action="${createLinkTo('dir': 'autoComplete/searchAJAX')}" onItemSelect="document.location.href = '${createLinkTo(dir: 'project/listSessions')}?session=' + id;"/>
+                <a href="${createLink(controller: 'project', action: 'create')}">Create New Collection</a>
+                |
+                <a href="${createLink(controller: 'link', action: 'list')}">Linkages</a>
+                |
+                <a href="${createLink(controller: 'log', action: 'list')}">Logs</a>
+                |
+                <a href="${createLink(controller: 'login', action: 'logout')}">Logout</a>
 
-                <hr width="50%"/>
-
-                <input style="width: 142px" type=button onClick="location.href = '${createLink(controller:'project', action:'create')}'" value='Create New Collection'>
                 <br/>
-                <input style="width: 142px" type=button onClick="location.href = '${createLink(controller:'link', action:'list')}'" value='Define Linkages'>
                 <br/>
-                <input style="width: 142px" type=button onClick="location.href = '${createLink(controller:'log', action:'list')}'" value='View Logs'>
-                <br/>
-                <g:form action="logout" controller="login" method="post">
-                    <g:actionSubmit style="width: 142px" value="Logout"/>
-                    <br/>
 
-                    <hr width="50%"/>
-                    <br/>
+                <div style="overflow: hidden;">
+                    <richui:tabView id="tabView">
+                        <richui:tabLabels>
+                            <richui:tabLabel selected="true" title="Search Session No"/>
+                            <richui:tabLabel title="Search Report Title"/>
+                            <richui:tabLabel title="Search Report Id"/>
+                        </richui:tabLabels>
+                        <richui:tabContents>
+                            <richui:tabContent>
+                                <br/>
+                                <g:form style="height: 300px">
+                                    <richui:autoComplete name="sajax" title="Search Sessions" style="width: 560px; " action="${createLinkTo('dir': 'autoComplete/sessionAJAX')}" onItemSelect="document.location.href = '${createLinkTo(dir: 'project/listSessions')}?session=' + id;"/>
+                                </g:form>
+                                <br/>
+                            </richui:tabContent>
 
-                </g:form>
+                            <richui:tabContent>
+                                <br/>
+                                <g:form style="height: 300px">
+                                    <richui:autoComplete name="tajax" title="Search Title" style="width: 560px; " action="${createLinkTo('dir': 'autoComplete/titleAJAX')}" onItemSelect="document.location.href = '${createLinkTo(dir: 'link/show')}?id=' + id;"/>
+                                </g:form>
+                                <br/>
+                            </richui:tabContent>
+
+                            <richui:tabContent>
+                                <br/>
+                                <g:form style="height: 300px">
+                                    <richui:autoComplete name="rajax" title="Search Report Id" style="width: 560px; " action="${createLinkTo('dir': 'autoComplete/reportAJAX')}" onItemSelect="document.location.href = '${createLinkTo(dir: 'link/show')}?id=' + id;"/>
+                                </g:form>
+                                <br/>
+                            </richui:tabContent>
+
+                        </richui:tabContents>
+                    </richui:tabView>
+                </div>
+
+            %{--
+            <input style="width: 142px" type=button onClick="location.href = '${createLink(controller:'project', action:'create')}'" value='Create New Collection'>
+            <br/>
+            <input style="width: 142px" type=button onClick="location.href = '${createLink(controller:'link', action:'list')}'" value='Define Linkages'>
+            <br/>
+            <input style="width: 142px" type=button onClick="location.href = '${createLink(controller:'log', action:'list')}'" value='View Logs'>
+            <br/>
+            <g:form action="logout" controller="login" method="post">
+                <g:actionSubmit style="width: 142px" value="Logout"/>
+            </g:form>
+            --}%
 
             </g:if>
         </div>
@@ -347,9 +393,10 @@
         <div align="center">
             <br/>
 
+
             <h3>Latest 10 Entries</h3>
             <br/>
-            <g:each in="${Project.listOrderById(order:'desc', max:10)}" var="e">
+            <g:each in="${Project.listOrderById(order: 'desc', max: 10)}" var="e">
                 <p><a href="${createLink(controller: 'project', action: 'show', id: e.id)}">${e.title}</a> <b>(${e.session})</b>
                 </p>
             </g:each>
