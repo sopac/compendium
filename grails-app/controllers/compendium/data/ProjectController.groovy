@@ -91,28 +91,30 @@ class ProjectController {
         }
     }
 
+    def clearLinks = {
+        Project p = Project.get(params.id)
+        p.setLinks(null)
+        flash.message = "Links removed from this project..."
+        redirect(action: "show", id: p.id)
+    }
+
     def update = {
         def projectInstance = Project.get(params.id)
+        Project tmp = Project.get(params.id)
+        ArrayList<Link> linksFinal = new ArrayList<Link>()
+        tmp.links.each { linksFinal.add(it) }
+        //println "l1: 1 - " + linksFinal.size()
+
+
         if (projectInstance) {
             if (params.version) {
                 def version = params.version.toLong()
                 if (projectInstance.version > version) {
-
                     projectInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'project.label', default: 'Project')] as Object[], "Another user has updated this Project while you were editing")
                     render(view: "edit", model: [projectInstance: projectInstance])
                     return
                 }
             }
-
-            def links1 = projectInstance.links
-
-            def l = []
-            params.links.each {
-                links
-            }
-
-
-            params.links = links1
 
             projectInstance.properties = params
 
@@ -126,6 +128,17 @@ class ProjectController {
                 l.project = projectInstance.id
                 l.timeStamp = new Date()
                 l.save()
+
+                //append links
+                //println "l1: 2 - " + linksFinal.size()
+                for (Link lx : linksFinal) {
+                    //println lx.title
+                    if (!projectInstance.links.id.contains(lx.id)) {
+                        projectInstance.getLinks().add(lx)
+                    }
+                }
+
+                projectInstance.save(flush: true)
 
                 redirect(action: "show", id: projectInstance.id)
             }
